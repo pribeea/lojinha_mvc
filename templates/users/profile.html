@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="profile-card">
+    <h2 class="text-center">Meu Perfil</h2>
+    <div class="card">
+        <h5 class="card-title">{{ user.username }}</h5>
+        <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+        <p class="card-text"><strong>ID:</strong> {{ user.id }}</p>
+    </div>
+</div>
+{% endblock %}
