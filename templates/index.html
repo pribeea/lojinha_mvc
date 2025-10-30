@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1 class="hero-title">Bem-vindo à Nossa Loja!</h1>
+    <p class="hero-text">Aqui você pode administrar a entrada e saída de produtos.</p>
+    
+    {% if current_user.is_authenticated %}
+        <div class="user-greeting">
+            <p>Olá, <strong>{{ current_user.username }}</strong>!</p>
+            <a class="btn btn-success" href="{{ url_for('product_controller.list_products') }}">Ver Meus Produtos</a>
+        </div>
+    {% else %}
+        <div class="auth-links">
+            <a class="btn btn-primary" href="{{ url_for('auth.register') }}">Criar Conta</a>
+            <a class="btn btn-secondary" href="{{ url_for('auth.login') }}">Fazer Login</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
