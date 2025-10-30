@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Loja{% endblock %}</title>
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a class="logo" href="{{ url_for('index') }}">Loja</a>
+                <ul class="nav-links">
+                    {% if current_user.is_authenticated %}
+                        <li><a class="nav-link" href="{{ url_for('product_controller.list_products') }}">Meus Produtos</a></li>
+                        <li><a class="nav-link" href="{{ url_for('user_controller.profile') }}">Perfil</a></li>
+                        <li><a class="nav-link" href="{{ url_for('auth.logout') }}">Sair</a></li>
+                    {% else %}
+                        <li><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>
+                        <li><a class="nav-link" href="{{ url_for('auth.register') }}">Cadastrar</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
